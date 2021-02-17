@@ -18,7 +18,7 @@ echo #========================================================================#
 REM start devmgmt.msc
 
 "%mypath%"devcon.exe enable "PCI\VEN_8086&DEV_0D05"
-"%mypath%"devcon.exe status "PCI\VEN_1002&DEV_66AF&SUBSYS_081E1002" > "%mypath%"eGPU-status.txt
+"%mypath%"devcon.exe status "PCI\VEN_1002&DEV_731F&SUBSYS_E4101DA2" > "%mypath%"eGPU-status.txt
 findstr /c:"12" "%mypath%eGPU-status.txt" && (echo ^> eGPU is not working properly!) || (goto :eof)
 
 echo ^> Starting eGPU PCIe controller toggler.
@@ -27,7 +27,7 @@ timeout /t 1 >nul
 
 for /l %%i in (1,1,500) do (
 
-  "%mypath%"devcon.exe status "PCI\VEN_1002&DEV_66AF&SUBSYS_081E1002" > "%mypath%"eGPU-status.txt
+  "%mypath%"devcon.exe status "PCI\VEN_1002&DEV_731F&SUBSYS_E4101DA2" > "%mypath%"eGPU-status.txt
   findstr /c:"12" "%mypath%eGPU-status.txt" && (echo ^> eGPU still not working yet...) || (goto :complete)
 
   "%mypath%"devcon.exe disable "PCI\VEN_8086&DEV_0D05"
